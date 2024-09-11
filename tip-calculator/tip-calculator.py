@@ -128,11 +128,14 @@ class TipCalculator(Gtk.Window):
         except ValueError:
             self.show_error("Invalid input. Please enter numeric values.")
             return
-
+        if self.selected_tip_percentage == 0:
+            self.show_error("Bruh you can't tip 0")
+            return
         if number_of_people <= 0:
             self.show_error("Number of people must be greater than zero.")
             return
 
+        
         # calculate values
         tip_percentage = self.selected_tip_percentage
         tip_amount = bill_amount * tip_percentage / 100
