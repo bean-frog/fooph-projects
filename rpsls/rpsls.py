@@ -1,3 +1,14 @@
+# Rock Paper Scissors Lizard Spock 
+# (c) 2024 Graeme Kieran
+# MIT License
+
+# description:
+# This program allows the user to play a continuation of Rock Paper Scissors that includes two new moves
+# The program has a GUI created with GTK that will match the user's selected GTK3 theme.
+# The normal gamemode has buttons to select a move
+# There is a harder gamemode that requires the user to write code in an esoteric language to play
+
+
 import gi
 import random
 
@@ -65,12 +76,12 @@ class GameWindow(Gtk.Window):
         self.start_box.pack_start(self.start_label, True, True, 0)
 
         self.start_button = Gtk.Button(label="Start Game (Normal)")
-        self.start_button.set_size_request(150, 50)  # Set fixed size
+        self.start_button.set_size_request(150, 50)  
         self.start_button.connect("clicked", self.on_start_button_clicked)
         self.start_box.pack_start(self.start_button, False, False, 0)
 
         self.start_button_bf = Gtk.Button(label="Start Game (Hard)")
-        self.start_button_bf.set_size_request(150, 50)  # Set fixed size
+        self.start_button_bf.set_size_request(150, 50) 
         self.start_button_bf.connect("clicked", self.on_bf_start_button_clicked)
         self.start_box.pack_start(self.start_button_bf, False, False, 0)
 
@@ -131,13 +142,13 @@ class GameWindow(Gtk.Window):
 
         # menu button
         self.main_menu_button = Gtk.Button(label="Main Menu")
-        self.main_menu_button.set_size_request(150, 50)  # Set fixed size
+        self.main_menu_button.set_size_request(150, 50) 
         self.main_menu_button.connect("clicked", self.on_main_menu_button_clicked)
         self.result_button_box.pack_start(self.main_menu_button, True, True, 0)
 
         # quit button
         self.exit_button = Gtk.Button(label="Quit")
-        self.exit_button.set_size_request(150, 50)  # Set fixed size
+        self.exit_button.set_size_request(150, 50)  
         self.exit_button.connect("clicked", self.on_exit_button_clicked)
         self.result_button_box.pack_start(self.exit_button, True, True, 0)
 
@@ -145,7 +156,7 @@ class GameWindow(Gtk.Window):
 
         # play again button
         self.play_again_button = Gtk.Button(label="Play Again")
-        self.play_again_button.set_size_request(150, 50)  # Set fixed size
+        self.play_again_button.set_size_request(150, 50)  
         self.play_again_button.connect("clicked", self.on_play_again_button_clicked)
         self.result_box.pack_start(self.play_again_button, False, False, 0)
 
