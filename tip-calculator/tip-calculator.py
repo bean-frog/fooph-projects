@@ -17,8 +17,7 @@ from gi.repository import Gtk, Pango
 
 class TipCalculator(Gtk.Window):
     def __init__(self):
-        Gtk.Window.__init__(self, title="Tip Calculator")
-        self.set_default_size(800, 600)
+        Gtk.Window.__init__(self, title="Tip Calculator - floatme")
         # vertical box to hold all the widgets
         self.box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.add(self.box)
