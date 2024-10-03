@@ -1,3 +1,10 @@
 cell.py
 testing.py
 rpsls/test.py
+
+bin
+include
+lib
+lib64
+share
+pyvenv.cfg
