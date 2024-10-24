@@ -4,7 +4,7 @@ from gi.repository import Gtk
 
 class TempConverter(Gtk.Window):
     def __init__(self):
-        Gtk.Window.__init__(self, title="Temperature Converter")
+        Gtk.Window.__init__(self, title="Temperature Converter - floatme")
 
         self.set_border_width(10)
         self.set_default_size(300, 200)

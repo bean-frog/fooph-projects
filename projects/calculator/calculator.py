@@ -1,3 +1,6 @@
+# YACA - Yet Another (gtk) Calculator App
+# (c) 2024 Graeme Kieran
+
 import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, Pango
@@ -72,7 +75,7 @@ class Calculator(Gtk.Window):
 
         self.advanced_grid = self.create_grid([
             ('C', 0, 3), 
-            ('(', 0, 0), (')', 0, 1), 
+            ('(', 0, 0), (')', 0, 1), ('del', 0, 2),
             ('7', 1, 0), ('8', 1, 1), ('9', 1, 2), ('/', 1, 3),
             ('4', 2, 0), ('5', 2, 1), ('6', 2, 2), ('*', 2, 3),
             ('1', 3, 0), ('2', 3, 1), ('3', 3, 2), ('-', 3, 3),
@@ -86,14 +89,10 @@ class Calculator(Gtk.Window):
         self.stack.add_titled(self.basic_grid, "basic", "Basic")
         self.stack.add_titled(self.advanced_grid, "advanced", "Advanced")
         
-
-       
-
         # variables to keep track of operations and expression
         self.current_expression = ""
         self.last_operator = ""  
         self.last_number = ""  # hold the last number (for nPr and nCr)
-
 
     # iterates through array of tuples and adds them to a Gtk.Grid
     def create_grid(self, button_layout, spacing=0):
@@ -135,6 +134,7 @@ class Calculator(Gtk.Window):
                 self.current_expression = str(result)
             except Exception as e:
                 self.current_expression = "Error"
+        # special operators
         elif label == 'nPr':
             self.last_operator = 'P'
             self.current_expression += 'P'
@@ -145,6 +145,12 @@ class Calculator(Gtk.Window):
             self.current_expression += "√("
         elif label == "sin" or label == "cos" or label == "tan":
             self.current_expression += label + "("
+
+            # TODO HOW THE FUCK DO YOU GET TEH LNGTH OF A STRINGGGGG
+        elif label == 'del' and self.current_expression.length() > 0:
+            exp_len = self.current_expression.length()
+            print(exp_len)
+
         else:
             if self.current_expression == "Error":
                 self.current_expression = ""
