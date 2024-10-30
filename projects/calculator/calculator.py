@@ -145,12 +145,6 @@ class Calculator(Gtk.Window):
             self.current_expression += "√("
         elif label == "sin" or label == "cos" or label == "tan":
             self.current_expression += label + "("
-
-            # TODO HOW THE FUCK DO YOU GET TEH LNGTH OF A STRINGGGGG
-        elif label == 'del' and self.current_expression.length() > 0:
-            exp_len = self.current_expression.length()
-            print(exp_len)
-
         else:
             if self.current_expression == "Error":
                 self.current_expression = ""
