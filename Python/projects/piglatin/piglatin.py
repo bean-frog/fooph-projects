@@ -7,6 +7,10 @@ class PigLatinTranslator(Gtk.Window):
         Gtk.Window.__init__(self, title="Pig Latin Translator - floatme")
         self.set_default_size(400, 200)
 
+        # Title 
+        self.title = Gtk.Label()
+        self.title.set_markup("<big><b>Pig Latin Translator</b></big>")
+
         # Setup stack and switcher
         self.stack = Gtk.Stack()
         self.stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT_RIGHT)
@@ -21,9 +25,10 @@ class PigLatinTranslator(Gtk.Window):
         # Pig Latin to english
         self.pig_latin_to_english_panel()
 
-        # place the stack and switcher
+        # place the title, stack, and switcher
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         vbox.set_border_width(10)
+        vbox.pack_start(self.title, False, False, 0)
         vbox.pack_start(stack_switcher, False, False, 0)
         vbox.pack_start(self.stack, True, True, 0)
         
