@@ -2,7 +2,6 @@ import gi
 import pygame
 import random
 import time
-from threading import Thread
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GdkPixbuf, GLib
