@@ -1,3 +1,5 @@
+
+import random
 import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, Pango
@@ -92,10 +94,18 @@ class BridgeCounter(Gtk.Window):
         # flowbox to hold the hand
         self.hand_frame = Gtk.FlowBox()
         
+        # bottom buttons
+        self.btn_hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+
         # calculate button
         self.calculate_button = Gtk.Button(label="Calculate Score")
         self.calculate_button.connect("clicked", lambda widget, hand=hand: self.calculate_hand(hand))
-        
+        self.btn_hbox.pack_start(self.calculate_button, True, True, 2)
+
+        # random hand button
+        self.random_hand_button = Gtk.Button(label="Random Hand")
+        self.random_hand_button.connect("clicked", self.use_random_hand)
+        self.btn_hbox.pack_start(self.random_hand_button, True, True, 2)
         # result label
         self.result_label = Gtk.Label()
         
@@ -104,7 +114,7 @@ class BridgeCounter(Gtk.Window):
         vbox.pack_start(self.of_label, False, False, 0)
         vbox.pack_start(self.suits_box, False, False, 0)
         vbox.pack_end(self.result_label, False, False, 0)
-        vbox.pack_end(self.calculate_button, True, False, 0)
+        vbox.pack_end(self.btn_hbox, True, False, 0)
         vbox.pack_end(self.hand_frame, True, True, 0)
         
         self.stack.add_titled(vbox, "input", "Input Hand")
@@ -185,7 +195,7 @@ class BridgeCounter(Gtk.Window):
     # calculate points
     def calculate_hand(self, hand):
         if len(hand) != 13:
-            self.result_label.set_markup("<span size='20pt'>Please ensure the hand contains 13 cards</span>")
+            self.result_label.set_markup(f"<span size='15pt'>Please ensure the hand contains 13 cards (you have {len(hand)})</span>")
         else:
             face_card_points = {
                 'ace': 4,
@@ -216,7 +226,23 @@ class BridgeCounter(Gtk.Window):
                 elif count == 0:
                     total_points += 3
             self.result_label.set_markup(f"<span size='20pt'>Your hand is worth <b>{total_points}</b> points.</span>")
+    
+    def use_random_hand(self, widget): #idk why widget needs to be here but it does
+        faces = ["ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king"]
+        all_cards = [(face, suit) for face in faces for suit in suits.keys()]
 
+        # clear existing hand
+        hand.clear()
+        for child in self.hand_frame.get_children():
+            self.hand_frame.remove(child)
+
+        # 13 random cards
+        random_hand = random.sample(all_cards, 13)
+        hand.extend(random_hand)
+
+        # update display to include cards
+        for card in random_hand:
+            self.add_card_button(card)
 # run
 win = BridgeCounter()
 win.connect("destroy", Gtk.main_quit)
