@@ -63,7 +63,7 @@ class EightBall(Gtk.Window):
         pygame.draw.circle(self.screen, (255, 255, 255), (200, 200), 100)  # white inner circle
         
         # center "8"
-        font = pygame.font.Font(None, 100)
+        font = pygame.font.Font(None, 200)
         text = font.render("8", True, (0, 0, 0))
         text_rect = text.get_rect(center=(200, 200))
         self.screen.blit(text, text_rect)
