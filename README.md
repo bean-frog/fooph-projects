@@ -9,3 +9,4 @@
 - `Python/projects/shapes` is a shape generator for polygons, pinwheels, and asterisks given several options
 - `Python/projects/piglatin` is a English <-> Pig Latin translator that is not always accurate but thats a feature
 - `Python/projects/bridge` calculates the point value of a given hand in the card game "bridge"
+- `Python/hangman` is a hangman game
