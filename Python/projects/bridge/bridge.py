@@ -56,7 +56,7 @@ class BridgeCounter(Gtk.Window):
         self.info_label.set_markup("""
         <b>How to use this calculator</b>\n
         Using the buttons, select the suit and face/number for each card in your hand.\n
-        Each card in your hand is represented by buttons,\n which you can click to remove if you made a mistake.\n
+        Each card in your hand is represented by buttons,\nwhich you can click to remove if you made a mistake.\n
         Press "Calculate" to show your hand's score.\n
         """)
         vbox.pack_start(self.info_label, False, False, 0)
