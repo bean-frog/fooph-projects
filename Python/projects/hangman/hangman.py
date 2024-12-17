@@ -8,7 +8,6 @@ from gi.repository import Gtk, Gdk, GdkPixbuf
 pygame.display.init()
 pygame.font.init()
 
-# Words for the game
 words = [
     "python",
     "javascript",
