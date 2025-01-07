@@ -12,12 +12,6 @@
         "phone": "+1-234-567-8902"
     },
     {
-        "name": "Michael Johnson",
-        "birthday": "20 Mar 1978",
-        "email": "michael.johnson@example.com",
-        "phone": "+1-234-567-8903"
-    },
-    {
         "name": "Emily Davis",
         "birthday": "25 Apr 1992",
         "email": "emily.davis@example.com",
@@ -322,5 +316,11 @@
         "birthday": "08 Jun 1994",
         "email": "robert.lee@example.com",
         "phone": "+1-234-567-8954"
+    },
+    {
+        "name": "joe",
+        "birthday": "jan 1",
+        "email": "bob@bob.bob",
+        "phone": "3"
     }
 ]
