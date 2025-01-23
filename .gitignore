@@ -7,3 +7,8 @@ Python/lib
 Python/lib64
 Python/share
 Python/pyvenv.cfg
+
+
+stock-simulator/client/node_modules
+stock-simulator/client/package-lock.json
+stock-simulator/server/target
