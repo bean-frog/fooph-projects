@@ -1,78 +1,98 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { themeChange } from 'theme-change'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Link,
+  Route,
+  useNavigate,
+} from 'react-router-dom'
+import Dashboard from './components/Dashboard'
+import Login from './components/Login'
+import Register from './components/Register'
+import Home from './components/Home'
+import './index.css'
+import OldApp from './App.old'
 
-function App() {
-  const [symbol, setSymbol] = useState('');
-  const [stockData, setStockData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+const App = () => {
+  useEffect(() => {
+    themeChange(false)
+  }, [])
 
-  const handleSymbolChange = (event) => {
-    setSymbol(event.target.value);
-  };
+  const [auth, setAuth] = useState(null)
 
-  const handleSearch = async () => {
-    if (!symbol) {
-      setError('Please enter a stock symbol');
-      return;
-    }
+  // API endpoints
+  const api = axios.create({
+    baseURL: 'http://127.0.0.1:8080',
+  })
 
-    setLoading(true);
-    setError(null);
-    setStockData(null);
+  const Header = ({ auth, setAuth, api }) => {
+    const navigate = useNavigate()
+    return (
+      <header className="flex fixed flex-row justify-between items-center px-4 py-2 w-screen h-fit bg-base-200">
+        <h1 className="text-xl font-bold text-primary">
+          Stock Trading Simulator
+        </h1>
+        <div className="ml-auto">
+          {auth ? (
+            <button
+              onClick={async () => {
+                await api.get('/logout').then(() => {
+                  setAuth(null)
+                  navigate('/')
+                })
+              }}
+              className="btn btn-sm btn-primary"
+            >
+              Logout
+            </button>
+          ) : null}
+          <select data-choose-theme className="select select-ghost select-sm">
+            <option value="sunset">Sunset (Default)</option>
+            <option value="forest">Forest</option>
+            <option value="retro">Retro</option>
+            <option value="light">Light</option>
+            <option value="black">Black</option>
+            <option value="nord">Nord</option>
+            <option value="luxury">Luxury</option>
+            <option value="pastel">Pastel</option>
+          </select>
+        </div>
+      </header>
+    )
+  }
 
-    try {
-      const response = await fetch(`http://127.0.0.1:8080/stock/${symbol.toUpperCase()}`);
-      if (response.ok) {
-        const data = await response.json();
-        setStockData(data);
-      } else {
-        setError('Stock not found or error fetching data');
-      }
-    } catch (err) {
-      setError('Error connecting to server');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const Layout = ({ children }) => {
+    return (
+      <>
+        <Header auth={auth} setAuth={setAuth} api={api} />
+        <div className="flex overflow-y-hidden flex-col justify-center items-center w-screen h-screen">
+          {children}
+        </div>
+      </>
+    )
+  }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-base-200">
-      <div className="w-full max-w-lg p-6 bg-base-100 shadow-md rounded-lg">
-        <h1 className="text-3xl font-bold text-center mb-6 text-primary">Stock Lookup</h1>
-
-        <div className="mb-4">
-          <input
-            type="text"
-            value={symbol}
-            onChange={handleSymbolChange}
-            placeholder="Enter stock symbol (e.g., AAPL)"
-            className="input input-bordered w-full p-3 text-xl rounded-md border-2 border-base-300 focus:border-primary focus:outline-none"
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home Link={Link} api={api} />} />
+          <Route path="/register" element={<Register api={api} />} />
+          <Route
+            path="/login"
+            element={<Login auth={auth} setAuth={setAuth} api={api} />}
           />
-        </div>
-
-        <div className="mb-4 flex justify-center">
-          <button
-            onClick={handleSearch}
-            disabled={loading}
-            className="btn btn-primary w-full md:w-auto"
-          >
-            {loading ? 'Loading...' : 'Search'}
-          </button>
-        </div>
-
-        {error && <div className="alert alert-error mb-4">{error}</div>}
-
-        {stockData && (
-          <div className="mt-6 p-4 bg-base-200 border-2 border-base-300 rounded-md">
-            <h2 className="text-2xl font-semibold text-center text-accent">
-              {stockData.companyName} ({stockData.symbol})
-            </h2>
-            <p className="text-lg mt-2 text-base-content">Price: ${stockData.latestPrice}</p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+          <Route
+            path="/dashboard"
+            element={<Dashboard auth={auth} api={api} />}
+          />
+          <Route path="/test" element={<OldApp />}/>
+        </Routes>
+      </Layout>
+    </Router>
+  )
 }
 
-export default App;
+export default App

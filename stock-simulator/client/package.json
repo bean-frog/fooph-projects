@@ -3,20 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^1.7.9",
     "cra-template": "1.2.0",
     "daisyui": "^4.12.23",
+    "prettier": "^3.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.4",
     "react-scripts": "5.0.1",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "theme-change": "^2.5.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "tailwind": "npx tailwindcss -o src/index.css --watch --minify"
-    },
+    "tailwind": "npx tailwindcss -o src/index.css --watch --minify",
+    "fmt": "npx prettier . --write"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

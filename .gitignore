@@ -8,9 +8,7 @@ Python/lib64
 Python/share
 Python/pyvenv.cfg
 
-# remove when finished
-stock-simulator/
 
 stock-simulator/client/node_modules
 stock-simulator/client/package-lock.json
-stock-simulator/server/target
+stock-simulator/server/node_modules
