@@ -88,7 +88,7 @@ const App = () => {
             path="/dashboard"
             element={<Dashboard auth={auth} api={api} />}
           />
-          <Route path="/test" element={<OldApp />}/>
+          <Route path="/test" element={<OldApp />} />
         </Routes>
       </Layout>
     </Router>

@@ -21,8 +21,5 @@ class Utils {
 		console.log(`${this.BOLD}${this.WHITE}[Info]:${this.RESET}${message}`)
 	}
 
-	
-
-	
 } // Utils
 export default Utils

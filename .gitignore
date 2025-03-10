@@ -7,7 +7,7 @@ Python/lib
 Python/lib64
 Python/share
 Python/pyvenv.cfg
-
+Python/projects/breakout/__pycache__
 
 stock-simulator/client/node_modules
 stock-simulator/client/package-lock.json

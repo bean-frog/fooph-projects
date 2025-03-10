@@ -59,7 +59,6 @@ app.get("/balance", async (req: Request, res: Response) => {
   }
 });
 
-
 // buy stocks
 app.post("/buy", async (req: Request, res: Response) => {
   const { symbol, amount } = req.body;
