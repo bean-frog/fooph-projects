@@ -2,6 +2,7 @@ import { Link } from 'react-router'
 import { useState, useEffect } from 'react'
 const Dashboard = ({ auth, api }) => {
   const [balance, setBalance] = useState(0)
+  const [holdingValue, setHoldingValue] = useState(0)
   const [error, setError] = useState(null)
   const [priceResult, setPriceResult] = useState(0)
   const [stockCheckAmount, setSCA] = useState(1)
@@ -22,8 +23,20 @@ const Dashboard = ({ auth, api }) => {
         console.error(err)
       }
     }
-
+    const getHoldingValue = async() => {
+      try {
+        const response = await api.get('/getHoldings')
+        response.data.forEach( async item => {
+          const priceRes = await api.get(`/stock/${item.symbol}`)
+          const price = priceRes.data.balance
+          setHoldingValue(holdingValue + (item.amount * price))
+        });
+      } catch (err) {
+        console.error(err)
+      }
+    }
     fetchBalance()
+    getHoldingValue()
   }, [])
   return (
     <div className="flex flex-col justify-center items-center w-screen h-screen">
@@ -35,7 +48,7 @@ const Dashboard = ({ auth, api }) => {
                 <div className="rounded-md border shadow stats border-primary">
                   <div className="stat">
                     <div className="stat-title text-secondary">Balance</div>
-                    <div className="stat-value">${balance.toFixed(2)}</div>
+                    <div className="stat-value">${balance == null ? "0.00" : balance.toFixed(2)}</div>
                   </div>
                 </div>
                 <div className="rounded-md border shadow stats border-primary">
@@ -43,7 +56,7 @@ const Dashboard = ({ auth, api }) => {
                     <div className="stat-title text-secondary">
                       Value of holdings
                     </div>
-                    <div className="stat-value">$89,400</div>
+                    <div className="stat-value">${holdingValue.toFixed(2)}</div>
                   </div>
                 </div>
               </div>
@@ -79,7 +92,7 @@ const Dashboard = ({ auth, api }) => {
                     placeholder="1"
                     className="mb-2 w-full input input-bordered"
                   />
-                  {priceResult != 0 ? (
+                  {priceResult !== 0 ? (
                     <>
                       <h1 className="text-xl font-bold text-primary">
                         {priceResult.companyName}
