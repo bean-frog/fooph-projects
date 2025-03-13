@@ -18,10 +18,11 @@ class BankAccount {
     }
 
     private static List<Account> accounts = new ArrayList<>();
-    private static final double WITHDRAW_LIMIT = 9999;
+    private static final double WITHDRAW_LIMIT = 3000;
     private String authUser = null;
 
     static {
+        // passwords shown in plaintext for demonstration purposes
         accounts.add(new Account("user1", hashPw("password"), 1.0));
         accounts.add(new Account("user2", hashPw("123456"), 2.0));
         accounts.add(new Account("user3", hashPw("verysecure"), 3.0));
@@ -35,12 +36,12 @@ class BankAccount {
                 return;
             }
         }
-        System.out.println("Wrong username or password.");
+        Utils.printInBox(Utils.formatAnsi("Bad username or password.", "red", true));
     }
 
     public Double getBalance() {
         if (authUser == null) {
-            System.out.println("Error: no authenticated user.");
+            Utils.printInBox(Utils.formatAnsi("No authenticated user.", "red", true));
             return null;
         }
         for (Account account : accounts) {
@@ -53,11 +54,11 @@ class BankAccount {
 
     public void withdraw(double amount) {
         if (authUser == null) {
-            Utils.printInBox("Error: no authenticated user.");
+            Utils.printInBox(Utils.formatAnsi("No authenticated user.", "red", true));
             return;
         }
         if (amount > WITHDRAW_LIMIT) {
-            Utils.printInBox(amount + " is above the withdraw limit.");
+            Utils.printInBox(Utils.formatAnsi(amount + " is above the withdraw limit." + "(limit: " + WITHDRAW_LIMIT + ")" , "red", true));
             return;
         }
         for (Account account : accounts) {
@@ -66,7 +67,7 @@ class BankAccount {
                     Utils.printInBox("You don't have that much money you brokie.\n Balance: " + account.balance + "\n Attempted withdrawal: " + amount);
                 } else {
                     account.balance -= amount;
-                    Utils.printInBox("New Balance: " + account.balance);
+                    Utils.printInBox(Utils.formatAnsi("New Balance: ", "green", true) + account.balance);
                 }
                 return;
             }
@@ -75,13 +76,13 @@ class BankAccount {
 
     public void deposit(double amount) {
         if (authUser == null) {
-            Utils.printInBox("No authenticated user.");
+            Utils.printInBox(Utils.formatAnsi("No authenticated user.", "red", true));
             return;
         }
         for (Account account : accounts) {
             if (account.username.equals(authUser)) {
                 account.balance += amount;
-                Utils.printInBox("New Balance: " + account.balance);
+                Utils.printInBox(Utils.formatAnsi("New Balance: ", "green", true) + account.balance);
                 return;
             }
         }

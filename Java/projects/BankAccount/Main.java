@@ -15,10 +15,10 @@ public class Main {
         BankAccount user = new BankAccount(username, password);
 
         while (true) {
-            System.out.println(Utils.formatAnsi("1. View Balance", "white", false));
-            System.out.println(Utils.formatAnsi("2. Withdraw", "white", false));
-            System.out.println(Utils.formatAnsi("3. Deposit", "white", false));
-            System.out.println(Utils.formatAnsi("4. Exit", "white", false));
+            System.out.println(Utils.formatAnsi("1. View Balance", "white", true));
+            System.out.println(Utils.formatAnsi("2. Withdraw", "white", true));
+            System.out.println(Utils.formatAnsi("3. Deposit", "white", true));
+            System.out.println(Utils.formatAnsi("4. Exit", "white", true));
 
             System.out.print("Enter a number\n> ");
             int choice = scanner.nextInt();
