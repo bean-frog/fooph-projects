@@ -1,9 +1,6 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
-import Stocks from "./methods";
-//import Db from "./db.ts"
-//import UserMgr from "./usermgr.ts"
-//import Utils from "./utils.ts"
+import Stocks from "./stocks";
 
 // express init
 const app = express();
