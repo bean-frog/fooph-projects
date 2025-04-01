@@ -12,7 +12,6 @@ const stocks = new Stocks();
 
 // Routes
 
-
 //stock info -> StockResponse
 app.get("/stock/:symbol", async(req: Request, res: Response) => {
     const result = await stocks.getStockInfo(req.params.symbol)
@@ -50,7 +49,7 @@ app.post("/balance", async (req: Request, res: Response) => {
 app.get("/balance", async (req: Request, res: Response) => {
   const result = await stocks.getBalance();
   if (result.error) {
-      res.status(400).json(result); // Send a 400 error for client-side issues
+      res.status(500).json(result); // 500 server error
   } else {
       res.json(result);
   }

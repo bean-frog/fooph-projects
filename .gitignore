@@ -12,3 +12,5 @@ Python/projects/breakout/__pycache__
 stock-simulator/client/node_modules
 stock-simulator/client/package-lock.json
 stock-simulator/server/node_modules
+
+Java/**/.gradle

@@ -22,7 +22,7 @@ class Stocks {
   private currentUser: string | null = null; // Tracks the logged-in user
 
   constructor() {
-    // Use the Database class for the SQLite connection.
+    // init database
     const database = new Database();
     this.db = database.db;
   }
