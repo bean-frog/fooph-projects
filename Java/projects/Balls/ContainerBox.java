@@ -1,4 +1,5 @@
-package projects.BouncingBalls;
+package projects.Balls;
+
 /*
  * You do not need to alter anything in this Class.
  *

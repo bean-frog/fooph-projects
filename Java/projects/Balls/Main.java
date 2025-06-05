@@ -1,4 +1,4 @@
-package projects.BouncingBalls;
+package projects.Balls;
 /*
  *You do not need to alter anything in this Class.
  *
@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 
 public class Main {
    public static void main(String[] args) {
-	   JFrame frame = new JFrame("Bouncing Ball");
+	   JFrame frame = new JFrame("Bouncing Ball - floatme");
        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        BallWorld size = new BallWorld(640, 480);
        frame.setContentPane(size); 
